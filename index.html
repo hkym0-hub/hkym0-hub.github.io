@@ -4,175 +4,461 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Hur Kim Yumi — Portfolio</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root {
-  --bg:#080c12; --surface:#0f1520; --surface2:#161e2e;
-  --border:rgba(255,255,255,0.07);
-  --text:#e8ecf2; --muted:#6b7a96;
-  --accent1:#4f9cff; --accent2:#a78bfa; --accent3:#34d399;
-}
+  :root {
+    --bg:         #080c12;
+    --surface:    #0f1520;
+    --surface2:   #161e2e;
+    --border:     rgba(255,255,255,0.07);
+    --text:       #e8ecf2;
+    --muted:      #6b7a96;
+    --accent1:    #4f9cff;
+    --accent2:    #a78bfa;
+    --accent3:    #34d399;
+    --glow1:      rgba(79,156,255,0.18);
+    --glow2:      rgba(167,139,250,0.15);
+    --heading:    'Syne', sans-serif;
+    --body:       'DM Sans', sans-serif;
+  }
 
-html { scroll-behavior:smooth; }
+  html { scroll-behavior: smooth; }
 
-body {
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial, sans-serif;
-}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
 
-nav {
-  position:fixed; top:0; width:100%;
-  display:flex; justify-content:center; gap:30px;
-  padding:15px;
-  background:rgba(0,0,0,0.6);
-}
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.6;
+  }
 
-nav a { color:#aaa; text-decoration:none; }
-nav a:hover { color:#fff; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5vw;
+    background: rgba(8,12,18,0.7);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--heading);
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
 
-section { padding:100px 10%; }
+  section { position: relative; padding: 7rem 5vw; max-width: 1100px; margin: 0 auto; }
 
-#hero {
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 8rem;
+    max-width: 100%;
+    padding-left: 8vw;
+    padding-right: 8vw;
+    overflow: hidden;
+  }
 
-h1 { font-size:60px; margin-bottom:10px; }
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; animation: drift 12s ease-in-out infinite alternate; }
+  .orb1 { width: 500px; height: 500px; background: var(--glow1); top: -80px; right: -100px; animation-delay: 0s; }
+  .orb2 { width: 380px; height: 380px; background: var(--glow2); bottom: 60px; left: -60px; animation-delay: -5s; }
+  @keyframes drift {
+    from { transform: translate(0,0) scale(1); }
+    to   { transform: translate(30px, 40px) scale(1.08); }
+  }
 
-.hero-major { color:var(--muted); margin-bottom:20px; }
+  .hero-eyebrow { font-family: var(--body); font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent3); font-weight: 500; margin-bottom: 1.2rem; opacity: 0; animation: fadeUp 0.7s 0.2s forwards; }
+  .hero-name { font-family: var(--heading); font-size: clamp(3.2rem, 8vw, 7rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; opacity: 0; animation: fadeUp 0.7s 0.4s forwards; }
+  .hero-name .line1 { display: block; color: var(--text); }
+  .hero-name .line2 { display: block; background: linear-gradient(100deg, var(--accent1) 10%, var(--accent2) 70%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-major { margin-top: 1.6rem; font-size: 1.05rem; color: var(--muted); font-weight: 300; opacity: 0; animation: fadeUp 0.7s 0.6s forwards; }
+  .hero-major span { color: var(--accent1); font-weight: 500; }
+  .hero-cta { margin-top: 2.8rem; display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.7s 0.8s forwards; }
+  .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.8rem; border-radius: 100px; font-family: var(--body); font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.25s; cursor: pointer; border: none; }
+  .btn-primary { background: linear-gradient(135deg, var(--accent1), var(--accent2)); color: #fff; box-shadow: 0 0 24px rgba(79,156,255,0.3); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 32px rgba(79,156,255,0.45); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { background: var(--surface); border-color: rgba(255,255,255,0.15); }
 
-.btn {
-  padding:12px 24px;
-  border-radius:30px;
-  background:linear-gradient(135deg,var(--accent1),var(--accent2));
-  color:white;
-  text-decoration:none;
-}
+  .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0; animation: fadeUp 0.7s 1.2s forwards; }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent1), transparent); animation: scrollPulse 1.8s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%, 100% { opacity: 0.3; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.15); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
-.card {
-  background:var(--surface);
-  border:1px solid var(--border);
-  padding:20px;
-  border-radius:20px;
-}
+  .section-tag { font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent1); font-weight: 500; margin-bottom: 0.6rem; }
+  .section-title { font-family: var(--heading); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1rem; }
+  .section-title .grad { background: linear-gradient(90deg, var(--accent1), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .divider { width: 48px; height: 3px; background: linear-gradient(90deg, var(--accent1), var(--accent2)); border-radius: 2px; margin-bottom: 2.5rem; }
 
-.project-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
+  #about { padding-top: 8rem; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; align-items: start; }
+  .about-visual { position: relative; display: flex; justify-content: center; }
+  .avatar-wrap { width: 220px; height: 220px; border-radius: 24px; background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%); padding: 3px; position: relative; }
+  .avatar-inner { width: 100%; height: 100%; border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 4rem; font-weight: 800; background: linear-gradient(135deg, #1a2133, #0f1827); }
+  .avatar-badge { position: absolute; bottom: -12px; right: -12px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.5rem 0.85rem; font-size: 0.78rem; color: var(--accent3); font-weight: 500; white-space: nowrap; }
+  .about-text p { color: var(--muted); font-size: 1.05rem; font-weight: 300; margin-bottom: 1.2rem; line-height: 1.8; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .info-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.6rem; }
+  .pill { padding: 0.35rem 1rem; background: var(--surface2); border: 1px solid var(--border); border-radius: 100px; font-size: 0.82rem; color: var(--muted); }
 
-.skills {
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
+  .projects-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem; }
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.2rem; }
+  .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; cursor: pointer; position: relative; }
+  .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(0,0,0,0.4); border-color: rgba(79,156,255,0.25); }
+  .project-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--glow1), transparent 60%); opacity: 0; transition: opacity 0.3s; }
+  .project-card:hover::before { opacity: 1; }
+  .card-thumb { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 2.8rem; }
+  .card-thumb-1 { background: linear-gradient(135deg, #0f2744, #1a3a6b); }
+  .card-thumb-2 { background: linear-gradient(135deg, #1a1230, #2d1b69); }
+  .card-thumb-3 { background: linear-gradient(135deg, #062622, #0d4035); }
+  .card-thumb-4 { background: linear-gradient(135deg, #241208, #4a2510); }
+  .card-thumb-5 { background: linear-gradient(135deg, #120c2a, #271550); }
+  .card-thumb-6 { background: linear-gradient(135deg, #0c1a2e, #152d50); }
+  .card-body { padding: 1.4rem; }
+  .card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+  .card-tag { font-size: 0.7rem; padding: 0.18rem 0.65rem; border-radius: 100px; font-weight: 500; }
+  .tag-blue   { background: rgba(79,156,255,0.12);  color: var(--accent1); }
+  .tag-purple { background: rgba(167,139,250,0.12); color: var(--accent2); }
+  .tag-green  { background: rgba(52,211,153,0.12);  color: var(--accent3); }
+  .tag-orange { background: rgba(251,146,60,0.12);  color: #fb923c; }
+  .card-title { font-family: var(--heading); font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+  .card-desc { font-size: 0.88rem; color: var(--muted); font-weight: 300; line-height: 1.6; }
+  .card-footer { padding: 0 1.4rem 1.2rem; display: flex; align-items: center; justify-content: flex-end; }
+  .card-link { font-size: 0.8rem; color: var(--accent1); text-decoration: none; font-weight: 500; opacity: 0.7; transition: opacity 0.2s; }
+  .card-link:hover { opacity: 1; }
 
-.skill {
-  padding:8px 15px;
-  background:var(--surface2);
-  border-radius:20px;
-}
+  .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 1.8rem; }
+  .skill-group-title { font-family: var(--heading); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; font-weight: 600; }
+  .skill-chips { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+  .skill-chip { padding: 0.45rem 1rem; border-radius: 10px; font-size: 0.85rem; font-weight: 500; border: 1px solid; transition: all 0.2s; }
+  .chip-blue   { background: rgba(79,156,255,0.07);  border-color: rgba(79,156,255,0.2);  color: var(--accent1); }
+  .chip-purple { background: rgba(167,139,250,0.07); border-color: rgba(167,139,250,0.2); color: var(--accent2); }
+  .chip-green  { background: rgba(52,211,153,0.07);  border-color: rgba(52,211,153,0.2);  color: var(--accent3); }
+  .chip-orange { background: rgba(251,146,60,0.07);  border-color: rgba(251,146,60,0.2);  color: #fb923c; }
+  .skill-chip:hover { transform: scale(1.04); }
 
-footer {
-  text-align:center;
-  padding:20px;
-  color:#888;
-}
+  #contact { padding-bottom: 8rem; }
+  .contact-wrapper { background: var(--surface); border: 1px solid var(--border); border-radius: 28px; padding: 3.5rem; position: relative; overflow: hidden; }
+  .contact-wrapper::before { content: ''; position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; background: radial-gradient(circle, var(--glow1), transparent 70%); pointer-events: none; }
+  .contact-wrapper::after  { content: ''; position: absolute; bottom: -60px; left: -60px; width: 240px; height: 240px; background: radial-gradient(circle, var(--glow2), transparent 70%); pointer-events: none; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; position: relative; z-index: 1; }
+  .contact-info p { color: var(--muted); font-size: 1rem; font-weight: 300; margin-bottom: 2rem; line-height: 1.8; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.8rem; }
+  .contact-link { display: flex; align-items: center; gap: 0.75rem; color: var(--muted); text-decoration: none; font-size: 0.92rem; transition: color 0.2s; }
+  .contact-link:hover { color: var(--text); }
+  .contact-link-icon { width: 36px; height: 36px; background: var(--surface2); border: 1px solid var(--border); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 500; }
+  .form-group input, .form-group textarea { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 0.75rem 1rem; color: var(--text); font-family: var(--body); font-size: 0.92rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s; resize: none; }
+  .form-group input:focus, .form-group textarea:focus { border-color: rgba(79,156,255,0.4); box-shadow: 0 0 0 3px rgba(79,156,255,0.08); }
+  .form-group textarea { min-height: 110px; }
+  .btn-send { background: linear-gradient(135deg, var(--accent1), var(--accent2)); color: #fff; border: none; padding: 0.85rem 2rem; border-radius: 12px; font-family: var(--body); font-size: 0.92rem; font-weight: 500; cursor: pointer; transition: all 0.25s; align-self: flex-start; }
+  .btn-send:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(79,156,255,0.3); }
+
+  footer { text-align: center; padding: 2rem 5vw; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; font-weight: 300; }
+  footer a { color: var(--accent1); text-decoration: none; }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-visual { justify-content: flex-start; }
+    .skills-layout { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-wrapper { padding: 2rem; }
+  }
+  @media (max-width: 480px) {
+    .nav-links { display: none; }
+    .hero-name { font-size: 2.8rem; }
+    .project-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
-
 <body>
 
 <nav>
-  <a href="#about">About</a>
-  <a href="#projects">Projects</a>
-  <a href="#skills">Skills</a>
-  <a href="#contact">Contact</a>
+  <a href="#hero" class="nav-logo">HKY.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
 <section id="hero">
-  <h1>Hur Kim Yumi</h1>
-  <p class="hero-major">Film, TV and Multimedia · SKKU</p>
-  <a href="#projects" class="btn">View My Work</a>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="hero-eyebrow">✦ Film maker · Storyteller · Creator</div>
+  <h1 class="hero-name">
+    <span class="line1">Hur Kim Yumi</span>
+    <span class="line2">Creates.</span>
+  </h1>
+  <p class="hero-major"><span>Film, TV &amp; Multimedia</span> · Sungkyunkwan University (SKKU)</p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View My Work →</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
 </section>
 
 <section id="about">
-  <h2>About Me</h2>
-  <div class="card">
-    <p>
-      Hi! I'm <strong>Hur Kim Yumi</strong>, a student at SKKU majoring in Film, TV and Multimedia.
-    </p>
-    <p>
-      I am interested in motion graphics, visual storytelling, and expressing abstract ideas through shape, movement, and rhythm.
-    </p>
-    <p>
-      My goal is to create visually engaging and meaningful media experiences that combine strong design with clear communication.
-    </p>
+  <div class="section-tag">Who I Am</div>
+  <h2 class="section-title">About <span class="grad">Me</span></h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-visual">
+      <div class="avatar-wrap">
+        <div class="avatar-inner">🎬</div>
+        <div class="avatar-badge">📍 Seoul, Korea</div>
+      </div>
+    </div>
+    <div class="about-text">
+      <p>Hi! I'm <strong>Hur Kim Yumi</strong>, a creative student at <strong>Sungkyunkwan University (SKKU)</strong> majoring in <strong>Film, TV and Multimedia</strong>. I'm passionate about visual storytelling and the art of bringing ideas to life on screen.</p>
+      <p>I explore the intersection of <strong>technology and narrative</strong> — from short film production to multimedia content creation. I believe every frame tells a story, and I strive to make each one count.</p>
+      <p>Currently expanding my skills in <strong>digital media production</strong>, video editing, and creative direction, with a deep interest in how emerging technologies are reshaping the world of film and television.</p>
+      <div class="info-pills">
+        <span class="pill">🎓 SKKU</span>
+        <span class="pill">🎬 Film, TV &amp; Multimedia</span>
+        <span class="pill">✨ Open to Collaborations</span>
+        <span class="pill">🌏 Seoul, Korea</span>
+      </div>
+    </div>
   </div>
 </section>
 
 <section id="projects">
-  <h2>Projects</h2>
+  <div class="projects-header">
+    <div>
+      <div class="section-tag">What I've Created</div>
+      <h2 class="section-title">Featured <span class="grad">Projects</span></h2>
+      <div class="divider" style="margin-bottom:0"></div>
+    </div>
+    <a href="#contact" class="btn btn-outline" style="font-size:0.85rem;">Let's Collaborate ↗</a>
+  </div>
   <div class="project-grid">
-
-    <div class="card">
-      <h3>Art Gallery Dashboard</h3>
-      <p>A Streamlit dashboard for organizing artworks and visual data.</p>
+    <div class="project-card">
+      <div class="card-thumb card-thumb-1">🎥</div>
+      <div class="card-body">
+        <div class="card-tags"><span class="card-tag tag-blue">Short Film</span><span class="card-tag tag-purple">Director</span></div>
+        <div class="card-title">Short Film Project</div>
+        <div class="card-desc">Add your short film title and a brief description — the theme, your role, and what inspired you to create it.</div>
+      </div>
+      <div class="card-footer"><a href="#" class="card-link">View Project ↗</a></div>
     </div>
-
-    <div class="card">
-      <h3>SNS Marketing Dashboard</h3>
-      <p>Dashboard analyzing engagement rate and campaign performance.</p>
+    <div class="project-card">
+      <div class="card-thumb card-thumb-2">📺</div>
+      <div class="card-body">
+        <div class="card-tags"><span class="card-tag tag-purple">TV Content</span><span class="card-tag tag-green">Script</span></div>
+        <div class="card-title">TV Content Project</div>
+        <div class="card-desc">Describe a TV or broadcast project you worked on — your role, the format, and the story behind it.</div>
+      </div>
+      <div class="card-footer"><a href="#" class="card-link">View Project ↗</a></div>
     </div>
-
-    <div class="card">
-      <h3>Music Mood Dashboard</h3>
-      <p>Mood-based music recommendation UI with visual charts.</p>
+    <div class="project-card">
+      <div class="card-thumb card-thumb-3">🎞️</div>
+      <div class="card-body">
+        <div class="card-tags"><span class="card-tag tag-green">Editing</span><span class="card-tag tag-orange">Post-Production</span></div>
+        <div class="card-title">Multimedia Production</div>
+        <div class="card-desc">A multimedia or digital content project — could be a video essay, branded content, or experimental piece.</div>
+      </div>
+      <div class="card-footer"><a href="#" class="card-link">View Project ↗</a></div>
     </div>
-
-    <div class="card">
-      <h3>Motion Graphics Study</h3>
-      <p>Experimental motion design exploring timing and visual rhythm.</p>
+    <div class="project-card">
+      <div class="card-thumb card-thumb-4">📸</div>
+      <div class="card-body">
+        <div class="card-tags"><span class="card-tag tag-orange">Photography</span><span class="card-tag tag-blue">Visual</span></div>
+        <div class="card-title">Visual Storytelling</div>
+        <div class="card-desc">A photography or visual art project that showcases your eye for composition, lighting, and narrative.</div>
+      </div>
+      <div class="card-footer"><a href="#" class="card-link">View Project ↗</a></div>
     </div>
-
+    <div class="project-card">
+      <div class="card-thumb card-thumb-5">🎙️</div>
+      <div class="card-body">
+        <div class="card-tags"><span class="card-tag tag-purple">Podcast</span><span class="card-tag tag-green">Audio</span></div>
+        <div class="card-title">Audio / Podcast Project</div>
+        <div class="card-desc">Any audio production work — a podcast series, sound design project, or radio-style content you've made.</div>
+      </div>
+      <div class="card-footer"><a href="#" class="card-link">View Project ↗</a></div>
+    </div>
+    <div class="project-card">
+      <div class="card-thumb card-thumb-6">✍️</div>
+      <div class="card-body">
+        <div class="card-tags"><span class="card-tag tag-blue">Screenplay</span><span class="card-tag tag-purple">Writing</span></div>
+        <div class="card-title">Screenplay / Script</div>
+        <div class="card-desc">A screenplay, script, or written narrative work — the genre, logline, and what makes the story unique.</div>
+      </div>
+      <div class="card-footer"><a href="#" class="card-link">View Project ↗</a></div>
+    </div>
   </div>
 </section>
 
 <section id="skills">
-  <h2>Skills</h2>
-  <div class="skills">
-    <span class="skill">Python</span>
-    <span class="skill">HTML</span>
-    <span class="skill">CSS</span>
-    <span class="skill">Streamlit</span>
-    <span class="skill">After Effects</span>
-    <span class="skill">Premiere Pro</span>
-    <span class="skill">Cinema 4D</span>
-    <span class="skill">Motion Graphics</span>
-    <span class="skill">UI Design</span>
+  <div class="section-tag">What I Know</div>
+  <h2 class="section-title">Skills &amp; <span class="grad">Tools</span></h2>
+  <div class="divider"></div>
+  <div class="skills-layout">
+    <div class="skill-group">
+      <div class="skill-group-title">Production</div>
+      <div class="skill-chips">
+        <span class="skill-chip chip-blue">Film Direction</span>
+        <span class="skill-chip chip-blue">Cinematography</span>
+        <span class="skill-chip chip-blue">Screenwriting</span>
+        <span class="skill-chip chip-blue">Storyboarding</span>
+        <span class="skill-chip chip-blue">Location Scouting</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Post-Production</div>
+      <div class="skill-chips">
+        <span class="skill-chip chip-purple">Adobe Premiere Pro</span>
+        <span class="skill-chip chip-purple">Final Cut Pro</span>
+        <span class="skill-chip chip-purple">After Effects</span>
+        <span class="skill-chip chip-purple">DaVinci Resolve</span>
+        <span class="skill-chip chip-purple">Audition</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Creative Tools</div>
+      <div class="skill-chips">
+        <span class="skill-chip chip-green">Photoshop</span>
+        <span class="skill-chip chip-green">Illustrator</span>
+        <span class="skill-chip chip-green">Canva</span>
+        <span class="skill-chip chip-green">Figma</span>
+        <span class="skill-chip chip-green">Lightroom</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Areas of Interest</div>
+      <div class="skill-chips">
+        <span class="skill-chip chip-orange">Documentary Film</span>
+        <span class="skill-chip chip-orange">Narrative Storytelling</span>
+        <span class="skill-chip chip-orange">Digital Media</span>
+        <span class="skill-chip chip-orange">Content Creation</span>
+        <span class="skill-chip chip-orange">AI &amp; Film</span>
+      </div>
+    </div>
   </div>
 </section>
 
 <section id="contact">
-  <h2>Contact</h2>
-  <div class="card">
-    <p>Email: hkym0@g.skku.edu</p>
-    <p>GitHub: github.com/hkym0-hub</p>
-    <p>Location: Seoul, Korea</p>
+  <div class="section-tag">Let's Connect</div>
+  <h2 class="section-title">Get in <span class="grad">Touch</span></h2>
+  <div class="divider"></div>
+  <div class="contact-wrapper">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p>Whether you have a creative project, a collaboration idea, or just want to talk about film — I'd love to hear from you. I'm open to student productions, internships, and creative partnerships.</p>
+        <div class="contact-links">
+          <a href="mailto:yumikim@skku.edu" class="contact-link">
+            <div class="contact-link-icon">✉️</div>yumikim@skku.edu
+          </a>
+          <a href="https://github.com/hurkimyumi" class="contact-link" target="_blank">
+            <div class="contact-link-icon">⌥</div>github.com/hurkimyumi
+          </a>
+          <a href="https://linkedin.com/in/hurkimyumi" class="contact-link" target="_blank">
+            <div class="contact-link-icon">🔗</div>linkedin.com/in/hurkimyumi
+          </a>
+          <a href="#" class="contact-link">
+            <div class="contact-link-icon">📄</div>Download Résumé
+          </a>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">Name</label>
+            <input id="fname" type="text" placeholder="Jane Doe" />
+          </div>
+          <div class="form-group">
+            <label for="femail">Email</label>
+            <input id="femail" type="email" placeholder="jane@example.com" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="fsubject">Subject</label>
+          <input id="fsubject" type="text" placeholder="Let's work together!" />
+        </div>
+        <div class="form-group">
+          <label for="fmsg">Message</label>
+          <textarea id="fmsg" placeholder="Tell me about your project or idea..."></textarea>
+        </div>
+        <button type="submit" class="btn-send">Send Message ✦</button>
+      </form>
+    </div>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 Hur Kim Yumi</p>
+  <p>Designed &amp; built by <a href="#">Hur Kim Yumi</a> · SKKU · <span id="year"></span></p>
 </footer>
 
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-send');
+    btn.textContent = '✅ Message Sent!';
+    btn.style.background = 'linear-gradient(135deg,#34d399,#059669)';
+    setTimeout(() => {
+      btn.textContent = 'Send Message ✦';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.project-card, .skill-group, .about-grid, .contact-wrapper').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(28px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
