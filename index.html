@@ -6,26 +6,32 @@
 <title>Hur Kim Yumi — Portfolio</title>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:#080c12; --surface:#0f1520; --surface2:#161e2e;
+  --border:rgba(255,255,255,0.07);
+  --text:#e8ecf2; --muted:#6b7a96;
+  --accent1:#4f9cff; --accent2:#a78bfa; --accent3:#34d399;
+}
+
+html { scroll-behavior:smooth; }
 
 body {
-  background:#0b0b12;
-  color:white;
-  font-family: Arial, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial, sans-serif;
 }
 
 nav {
-  position:fixed;
-  width:100%;
-  padding:20px;
-  display:flex;
-  justify-content:center;
-  gap:30px;
-  background:rgba(0,0,0,0.5);
+  position:fixed; top:0; width:100%;
+  display:flex; justify-content:center; gap:30px;
+  padding:15px;
+  background:rgba(0,0,0,0.6);
 }
 
 nav a { color:#aaa; text-decoration:none; }
-nav a:hover { color:white; }
+nav a:hover { color:#fff; }
 
 section { padding:100px 10%; }
 
@@ -38,31 +44,23 @@ section { padding:100px 10%; }
   text-align:center;
 }
 
-h1 {
-  font-size:70px;
-  background:linear-gradient(90deg,#6a85ff,#b06aff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
+h1 { font-size:60px; margin-bottom:10px; }
 
-.hero-major {
-  color:#aaa;
-  margin:20px 0;
-}
+.hero-major { color:var(--muted); margin-bottom:20px; }
 
 .btn {
   padding:12px 24px;
   border-radius:30px;
-  background:linear-gradient(135deg,#6a85ff,#b06aff);
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
   color:white;
   text-decoration:none;
 }
 
 .card {
-  background:#151522;
-  padding:25px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:20px;
   border-radius:20px;
-  margin-top:20px;
 }
 
 .project-grid {
@@ -78,15 +76,15 @@ h1 {
 }
 
 .skill {
-  background:#1f1f2e;
   padding:8px 15px;
+  background:var(--surface2);
   border-radius:20px;
 }
 
 footer {
   text-align:center;
-  padding:30px;
-  color:#777;
+  padding:20px;
+  color:#888;
 }
 </style>
 </head>
@@ -102,7 +100,7 @@ footer {
 
 <section id="hero">
   <h1>Hur Kim Yumi</h1>
-  <p class="hero-major">Motion Graphics & Design · SKKU</p>
+  <p class="hero-major">Motion Graphics & Visual Design · SKKU</p>
   <a href="#projects" class="btn">View My Work</a>
 </section>
 
@@ -110,41 +108,39 @@ footer {
   <h2>About Me</h2>
   <div class="card">
     <p>
-      Hi, I'm <strong>Hur Kim Yumi</strong>, a student at SKKU focusing on motion graphics and visual design.
+      Hi! I'm <strong>Hur Kim Yumi</strong>, a student at SKKU majoring in Film, TV and Multimedia.
     </p>
     <p>
-      I am interested in expressing ideas through movement, rhythm, and visual composition.
-      My work explores how abstract concepts can be translated into clear and impactful visuals.
+      My main interests are motion graphics and visual design. I enjoy creating visual work through shape, color, layout, movement, and rhythm.
     </p>
     <p>
-      I aim to create visually engaging motion graphics that combine strong design, timing, and emotional flow.
+      I aim to make clear and impactful designs that communicate ideas visually rather than focusing on film production or shooting.
     </p>
   </div>
 </section>
 
 <section id="projects">
   <h2>Projects</h2>
-
   <div class="project-grid">
 
     <div class="card">
-      <h3>Motion Graphics Project</h3>
-      <p>Visual experiments using shape, rhythm, and timing to create abstract narratives.</p>
+      <h3>Motion Graphics Study</h3>
+      <p>Experimental motion design exploring shape, timing, rhythm, and visual flow.</p>
     </div>
 
     <div class="card">
-      <h3>Design Composition Study</h3>
-      <p>Projects exploring layout, balance, contrast, and spatial composition.</p>
+      <h3>Visual Design Composition</h3>
+      <p>A design study focused on layout, balance, contrast, space, and visual impact.</p>
     </div>
 
     <div class="card">
-      <h3>Mirroring & Visual Effects</h3>
-      <p>Work focused on symmetry, repetition, and visual impact using motion design techniques.</p>
+      <h3>Mirroring Visual Experiment</h3>
+      <p>A visual experiment using symmetry, repetition, and mirrored composition to create strong imagery.</p>
     </div>
 
     <div class="card">
-      <h3>Personal Visual Experiments</h3>
-      <p>Independent projects experimenting with color, movement, and abstract storytelling.</p>
+      <h3>Abstract Motion Concept</h3>
+      <p>A motion graphics concept expressing abstract ideas through movement, color, and form.</p>
     </div>
 
   </div>
@@ -156,10 +152,14 @@ footer {
     <span class="skill">After Effects</span>
     <span class="skill">Premiere Pro</span>
     <span class="skill">Cinema 4D</span>
+    <span class="skill">Illustrator</span>
+    <span class="skill">Photoshop</span>
     <span class="skill">Motion Graphics</span>
     <span class="skill">Visual Design</span>
     <span class="skill">Composition</span>
     <span class="skill">Timing & Rhythm</span>
+    <span class="skill">HTML</span>
+    <span class="skill">CSS</span>
   </div>
 </section>
 
