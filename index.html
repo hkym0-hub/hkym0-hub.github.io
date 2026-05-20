@@ -1,178 +1,933 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Hur Kim Yumi — Portfolio</title>
-
+<title>Hur Kim Yumi — Motion & Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-:root {
-  --bg:#080c12; --surface:#0f1520; --surface2:#161e2e;
-  --border:rgba(255,255,255,0.07);
-  --text:#e8ecf2; --muted:#6b7a96;
-  --accent1:#4f9cff; --accent2:#a78bfa; --accent3:#34d399;
+:root{
+  --cream:#f5f0e8;
+  --ink:#0e0c0a;
+  --warm:#e8e0d0;
+  --orange:#ff5c1a;
+  --orange-soft:rgba(255,92,26,0.12);
+  --muted:#7a7269;
+  --border:#d8d0c4;
+  --surface:#ffffff;
+  --display:'Bebas Neue',sans-serif;
+  --serif:'Instrument Serif',serif;
+  --body:'Outfit',sans-serif;
 }
 
-html { scroll-behavior:smooth; }
-
-body {
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial, sans-serif;
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+  cursor:none;
 }
 
-nav {
-  position:fixed; top:0; width:100%;
-  display:flex; justify-content:center; gap:30px;
-  padding:15px;
-  background:rgba(0,0,0,0.6);
+/* ── CUSTOM CURSOR ── */
+.cursor{
+  position:fixed;width:12px;height:12px;
+  background:var(--orange);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .2s,height .2s,background .2s;
+  mix-blend-mode:multiply;
 }
-
-nav a { color:#aaa; text-decoration:none; }
-nav a:hover { color:#fff; }
-
-section { padding:100px 10%; }
-
-#hero {
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
+.cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:1.5px solid var(--orange);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:all .12s ease;
+  opacity:0.6;
 }
+body:hover .cursor{width:12px;height:12px}
 
-h1 { font-size:60px; margin-bottom:10px; }
-
-.hero-major { color:var(--muted); margin-bottom:20px; }
-
-.btn {
-  padding:12px 24px;
-  border-radius:30px;
-  background:linear-gradient(135deg,var(--accent1),var(--accent2));
-  color:white;
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem 4rem;
+  mix-blend-mode:multiply;
+}
+.nav-logo{
+  font-family:var(--display);
+  font-size:1.4rem;
+  letter-spacing:0.08em;
+  color:var(--ink);
   text-decoration:none;
 }
-
-.card {
-  background:var(--surface);
-  border:1px solid var(--border);
-  padding:20px;
-  border-radius:20px;
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:0.8rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  font-weight:500;
+  transition:color .2s;
+  position:relative;
 }
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;
+  height:1px;background:var(--orange);
+  transform:scaleX(0);transition:transform .2s;
+  transform-origin:left;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{transform:scaleX(1)}
 
-.project-grid {
+/* ── HERO ── */
+#hero{
+  min-height:100vh;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
+  grid-template-columns:1fr 1fr;
+  align-items:end;
+  padding:0 4rem 4rem;
+  padding-top:7rem;
+  position:relative;
+  overflow:hidden;
 }
 
-.skills {
+.hero-bg-text{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-52%);
+  font-family:var(--display);
+  font-size:clamp(10rem,22vw,22rem);
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--border);
+  white-space:nowrap;
+  pointer-events:none;
+  user-select:none;
+  letter-spacing:0.04em;
+  animation:bgDrift 20s ease-in-out infinite alternate;
+}
+@keyframes bgDrift{
+  from{transform:translate(-50%,-52%) rotate(-1deg)}
+  to  {transform:translate(-50%,-50%) rotate(1deg)}
+}
+
+.hero-left{
+  position:relative;z-index:1;
+  padding-bottom:1rem;
+}
+.hero-number{
+  font-family:var(--display);
+  font-size:0.9rem;
+  color:var(--orange);
+  letter-spacing:0.3em;
+  margin-bottom:1.5rem;
+  opacity:0;
+  animation:slideIn .6s .1s forwards;
+}
+.hero-title{
+  font-family:var(--display);
+  font-size:clamp(5rem,11vw,11rem);
+  line-height:0.88;
+  letter-spacing:0.01em;
+  opacity:0;
+  animation:slideIn .7s .25s forwards;
+}
+.hero-title .t-orange{color:var(--orange)}
+.hero-title .t-serif{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:0.72em;
+  line-height:1;
+}
+.hero-sub{
+  margin-top:2rem;
+  font-size:0.9rem;
+  color:var(--muted);
+  font-weight:300;
+  max-width:320px;
+  line-height:1.7;
+  opacity:0;
+  animation:slideIn .6s .45s forwards;
+}
+
+.hero-right{
+  position:relative;z-index:1;
   display:flex;
-  flex-wrap:wrap;
-  gap:10px;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:2rem;
+  padding-bottom:1rem;
+}
+.hero-tag{
+  font-family:var(--display);
+  font-size:0.82rem;
+  letter-spacing:0.22em;
+  color:var(--muted);
+  writing-mode:vertical-rl;
+  text-transform:uppercase;
+  opacity:0;
+  animation:fadeIn .8s .6s forwards;
+}
+.hero-cta-group{
+  display:flex;flex-direction:column;gap:0.8rem;align-items:flex-end;
+  opacity:0;animation:fadeIn .6s .7s forwards;
+}
+.btn-main{
+  display:inline-flex;align-items:center;gap:0.6rem;
+  padding:0.9rem 2.2rem;
+  background:var(--ink);color:var(--cream);
+  font-family:var(--body);font-size:0.85rem;font-weight:500;
+  letter-spacing:0.06em;text-transform:uppercase;
+  text-decoration:none;
+  border:none;cursor:pointer;
+  transition:all .25s;
+  border-radius:2px;
+}
+.btn-main:hover{background:var(--orange);transform:translateX(-4px)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.8rem;color:var(--muted);text-decoration:none;
+  font-weight:500;letter-spacing:0.08em;
+  transition:color .2s;
+  background:none;border:none;cursor:pointer;
+}
+.btn-ghost:hover{color:var(--ink)}
+
+.hero-scroll{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.6rem;
+  color:var(--muted);font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;
+  opacity:0;animation:fadeIn .6s 1s forwards;
+}
+.scroll-dot{
+  width:5px;height:5px;background:var(--orange);border-radius:50%;
+  animation:bounce 1.6s ease-in-out infinite;
+}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+@keyframes slideIn{
+  from{opacity:0;transform:translateY(40px)}
+  to  {opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+  from{opacity:0}to{opacity:1}
 }
 
-.skill {
-  padding:8px 15px;
-  background:var(--surface2);
-  border-radius:20px;
+/* ── MARQUEE ── */
+.marquee-wrap{
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:1rem 0;
+  overflow:hidden;
+  background:var(--ink);
+}
+.marquee-track{
+  display:flex;
+  white-space:nowrap;
+  animation:marquee 18s linear infinite;
+}
+.marquee-track span{
+  font-family:var(--display);
+  font-size:1.1rem;
+  letter-spacing:0.2em;
+  color:var(--cream);
+  padding:0 2rem;
+  opacity:0.7;
+}
+.marquee-track span.dot{color:var(--orange);opacity:1;font-size:1.5rem;vertical-align:middle}
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to  {transform:translateX(-50%)}
 }
 
-footer {
-  text-align:center;
-  padding:20px;
-  color:#888;
+/* ── ABOUT ── */
+#about{max-width:1200px;margin:0 auto;padding:8rem 4rem}
+.about-layout{
+  display:grid;
+  grid-template-columns:220px 1fr 1fr;
+  gap:4rem;
+  align-items:start;
+}
+.about-index{
+  padding-top:0.4rem;
+}
+.about-index-num{
+  font-family:var(--display);
+  font-size:5rem;
+  line-height:1;
+  color:var(--border);
+  letter-spacing:-0.02em;
+  margin-bottom:0.5rem;
+}
+.about-index-label{
+  font-size:0.72rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--orange);
+  font-weight:600;
+}
+.about-headline{
+  font-family:var(--display);
+  font-size:clamp(2.8rem,5vw,4.5rem);
+  line-height:0.92;
+  letter-spacing:0.01em;
+  grid-column:2/3;
+}
+.about-headline em{
+  font-family:var(--serif);
+  font-style:italic;
+  color:var(--orange);
+}
+.about-body{grid-column:3/4;padding-top:0.5rem}
+.about-body p{
+  color:var(--muted);
+  font-size:0.98rem;
+  font-weight:300;
+  line-height:1.85;
+  margin-bottom:1.2rem;
+}
+.about-body p strong{color:var(--ink);font-weight:600}
+.about-tags{
+  display:flex;flex-wrap:wrap;gap:0.5rem;
+  margin-top:1.8rem;
+}
+.about-tag{
+  padding:0.3rem 0.9rem;
+  border:1px solid var(--border);
+  font-size:0.78rem;
+  color:var(--muted);
+  font-weight:500;
+  letter-spacing:0.04em;
+  border-radius:2px;
+  transition:all .2s;
+}
+.about-tag:hover{border-color:var(--orange);color:var(--orange)}
+
+/* ── PROJECTS ── */
+#projects{padding:2rem 0 6rem}
+.projects-header{
+  max-width:1200px;margin:0 auto;
+  padding:0 4rem 3rem;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  border-bottom:1px solid var(--border);
+  margin-bottom:0;
+}
+.projects-label{
+  font-size:0.72rem;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--orange);font-weight:600;
+}
+.projects-title{
+  font-family:var(--display);
+  font-size:clamp(3rem,6vw,5.5rem);
+  line-height:0.88;
+  letter-spacing:0.01em;
+  margin-top:0.5rem;
+}
+.projects-count{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:1.1rem;
+  color:var(--muted);
+}
+
+.project-list{max-width:1200px;margin:0 auto;padding:0 4rem}
+.project-item{
+  display:grid;
+  grid-template-columns:80px 1fr auto;
+  gap:2rem;
+  align-items:center;
+  padding:2rem 0;
+  border-bottom:1px solid var(--border);
+  cursor:pointer;
+  transition:all .25s;
+  position:relative;
+  overflow:hidden;
+}
+.project-item::before{
+  content:'';
+  position:absolute;left:0;top:0;bottom:0;
+  width:0;background:var(--orange-soft);
+  transition:width .3s;
+  z-index:0;
+}
+.project-item:hover::before{width:100%}
+.project-item>*{position:relative;z-index:1}
+.project-num{
+  font-family:var(--display);
+  font-size:0.85rem;
+  color:var(--border);
+  letter-spacing:0.1em;
+  transition:color .2s;
+}
+.project-item:hover .project-num{color:var(--orange)}
+.project-info{}
+.project-name{
+  font-family:var(--display);
+  font-size:clamp(1.6rem,3vw,2.6rem);
+  letter-spacing:0.02em;
+  line-height:1;
+  transition:transform .25s;
+}
+.project-item:hover .project-name{transform:translateX(8px)}
+.project-desc{
+  font-size:0.85rem;color:var(--muted);
+  font-weight:300;margin-top:0.3rem;
+}
+.project-meta{
+  display:flex;flex-direction:column;align-items:flex-end;gap:0.4rem;
+}
+.project-tags-inline{display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end}
+.ptag{
+  font-size:0.7rem;padding:0.2rem 0.65rem;
+  border:1px solid var(--border);
+  color:var(--muted);letter-spacing:0.04em;border-radius:2px;
+}
+.project-arrow{
+  font-size:1.2rem;color:var(--border);
+  transition:all .25s;
+}
+.project-item:hover .project-arrow{color:var(--orange);transform:translate(4px,-4px)}
+
+/* ── SKILLS ── */
+#skills{background:var(--ink);padding:7rem 4rem;margin:4rem 0}
+.skills-inner{max-width:1200px;margin:0 auto}
+.skills-top{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:4rem;
+  padding-bottom:2rem;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.skills-headline{
+  font-family:var(--display);
+  font-size:clamp(3rem,6vw,5rem);
+  color:var(--cream);
+  letter-spacing:0.02em;
+  line-height:0.9;
+}
+.skills-headline span{color:var(--orange)}
+.skills-note{
+  font-family:var(--serif);
+  font-style:italic;
+  color:rgba(255,255,255,0.3);
+  font-size:1rem;
+  max-width:200px;
+  text-align:right;
+  line-height:1.5;
+}
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+}
+.skill-col{
+  padding:2rem;
+  border-right:1px solid rgba(255,255,255,0.07);
+}
+.skill-col:last-child{border-right:none}
+.skill-col-label{
+  font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--orange);font-weight:600;margin-bottom:1.5rem;
+}
+.skill-list{list-style:none;display:flex;flex-direction:column;gap:0.65rem}
+.skill-list li{
+  font-size:0.95rem;color:rgba(255,255,255,0.5);
+  font-weight:300;
+  padding-bottom:0.65rem;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  transition:color .2s;
+  cursor:default;
+}
+.skill-list li:hover{color:var(--cream)}
+.skill-list li:last-child{border-bottom:none}
+.skill-list li.highlight{color:rgba(255,255,255,0.85);font-weight:500}
+
+/* ── CONTACT ── */
+#contact{max-width:1200px;margin:0 auto;padding:7rem 4rem 8rem}
+.contact-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6rem;
+  align-items:start;
+}
+.contact-left{}
+.contact-big{
+  font-family:var(--display);
+  font-size:clamp(4rem,9vw,8rem);
+  line-height:0.85;
+  letter-spacing:0.01em;
+  margin-bottom:2rem;
+}
+.contact-big span{color:var(--orange)}
+.contact-copy{
+  font-size:1rem;color:var(--muted);
+  font-weight:300;line-height:1.8;
+  max-width:360px;
+  margin-bottom:2.5rem;
+}
+.contact-line-links{display:flex;flex-direction:column;gap:0.6rem}
+.clink{
+  display:flex;align-items:center;gap:1rem;
+  text-decoration:none;color:var(--ink);
+  font-size:0.9rem;font-weight:500;
+  padding:0.75rem 0;
+  border-bottom:1px solid var(--border);
+  transition:all .2s;
+  group:true;
+}
+.clink:hover{padding-left:0.5rem;border-color:var(--orange);color:var(--orange)}
+.clink-label{flex:1}
+.clink-arrow{opacity:0.3;transition:opacity .2s}
+.clink:hover .clink-arrow{opacity:1}
+
+.contact-right{}
+.contact-form{display:flex;flex-direction:column;gap:1.5rem}
+.field{display:flex;flex-direction:column;gap:0.4rem}
+.field label{
+  font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;
+}
+.field input,.field textarea{
+  background:transparent;
+  border:none;border-bottom:1.5px solid var(--border);
+  padding:0.7rem 0;
+  color:var(--ink);
+  font-family:var(--body);font-size:0.95rem;
+  outline:none;
+  transition:border-color .2s;
+  resize:none;
+  border-radius:0;
+}
+.field input:focus,.field textarea:focus{border-color:var(--orange)}
+.field input::placeholder,.field textarea::placeholder{color:var(--border)}
+.field textarea{min-height:100px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.btn-submit{
+  align-self:flex-start;
+  margin-top:0.5rem;
+  display:inline-flex;align-items:center;gap:0.8rem;
+  padding:1rem 2.5rem;
+  background:var(--orange);color:#fff;
+  font-family:var(--body);font-size:0.85rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  border:none;cursor:pointer;border-radius:2px;
+  transition:all .25s;
+}
+.btn-submit:hover{background:var(--ink);transform:translateY(-2px)}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);
+  padding:1.5rem 4rem;
+  display:flex;justify-content:space-between;align-items:center;
+  max-width:100%;
+}
+.footer-left{font-size:0.78rem;color:var(--muted);font-weight:300}
+.footer-right{
+  font-family:var(--display);
+  font-size:0.85rem;letter-spacing:0.1em;color:var(--border);
+}
+
+/* ── REVEAL ANIMATION ── */
+.reveal{
+  opacity:0;transform:translateY(32px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:1.2rem 2rem}
+  #hero{grid-template-columns:1fr;padding:6rem 2rem 3rem;gap:3rem}
+  .hero-right{align-items:flex-start;flex-direction:row;flex-wrap:wrap}
+  .hero-bg-text{font-size:18vw}
+  .about-layout{grid-template-columns:1fr;gap:2rem}
+  .about-index-num{font-size:3rem}
+  .about-headline{font-size:3rem}
+  .projects-header{padding:0 2rem 2rem}
+  .project-list{padding:0 2rem}
+  .project-item{grid-template-columns:50px 1fr auto;gap:1rem}
+  #skills{padding:4rem 2rem}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .skill-col{border-right:none;border-bottom:1px solid rgba(255,255,255,0.07)}
+  .contact-layout{grid-template-columns:1fr;gap:3rem}
+  #contact{padding:5rem 2rem 6rem}
+  footer{padding:1.5rem 2rem}
+}
+@media(max-width:560px){
+  .hero-title{font-size:4.5rem}
+  .project-item{grid-template-columns:1fr;gap:0.5rem}
+  .project-num{display:none}
+  .project-meta{align-items:flex-start}
+  .form-row{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  body{cursor:auto}
+  .cursor,.cursor-ring{display:none}
 }
 </style>
 </head>
-
 <body>
 
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
 <nav>
-  <a href="#about">About</a>
-  <a href="#projects">Projects</a>
-  <a href="#skills">Skills</a>
-  <a href="#contact">Contact</a>
+  <a href="https://hkym0-hub.github.io/" class="nav-logo">HKY</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
-  <h1>Hur Kim Yumi</h1>
-  <p class="hero-major">Film, TV and Multimedia · SKKU</p>
-  <a href="#projects" class="btn">View My Work</a>
+  <div class="hero-bg-text">DESIGN</div>
+  <div class="hero-left">
+    <div class="hero-number">001 / PORTFOLIO</div>
+    <h1 class="hero-title">
+      HUR<br>
+      KIM<br>
+      <span class="t-orange t-serif">Yumi.</span>
+    </h1>
+    <p class="hero-sub">Motion Graphics & Visual Design — crafting movement, meaning, and identity at SKKU.</p>
+  </div>
+  <div class="hero-right">
+    <span class="hero-tag">Motion · Design · SKKU · Seoul</span>
+    <div class="hero-cta-group">
+      <a href="#projects" class="btn-main">View Work ↓</a>
+      <a href="#contact" class="btn-ghost">Get in touch →</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-dot"></div>
+  </div>
 </section>
 
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>MOTION GRAPHICS</span><span class="dot">✦</span>
+    <span>VISUAL DESIGN</span><span class="dot">✦</span>
+    <span>BRAND IDENTITY</span><span class="dot">✦</span>
+    <span>UI ANIMATION</span><span class="dot">✦</span>
+    <span>MULTIMEDIA</span><span class="dot">✦</span>
+    <span>FILM · TV · SKKU</span><span class="dot">✦</span>
+    <span>MOTION GRAPHICS</span><span class="dot">✦</span>
+    <span>VISUAL DESIGN</span><span class="dot">✦</span>
+    <span>BRAND IDENTITY</span><span class="dot">✦</span>
+    <span>UI ANIMATION</span><span class="dot">✦</span>
+    <span>MULTIMEDIA</span><span class="dot">✦</span>
+    <span>FILM · TV · SKKU</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
 <section id="about">
-  <h2>About Me</h2>
-  <div class="card">
-    <p>
-      Hi! I'm <strong>Hur Kim Yumi</strong>, a student at SKKU majoring in Film, TV and Multimedia.
-    </p>
-    <p>
-      I am interested in motion graphics, visual storytelling, and expressing abstract ideas through shape, movement, and rhythm.
-    </p>
-    <p>
-      My goal is to create visually engaging and meaningful media experiences that combine strong design with clear communication.
-    </p>
+  <div class="about-layout">
+    <div class="about-index reveal">
+      <div class="about-index-num">01</div>
+      <div class="about-index-label">About Me</div>
+    </div>
+    <h2 class="about-headline reveal">
+      Design<br>
+      that<br>
+      <em>moves</em><br>
+      people.
+    </h2>
+    <div class="about-body reveal">
+      <p>Hi! I'm <strong>Hur Kim Yumi</strong>, a student at <strong>Sungkyunkwan University (SKKU)</strong> majoring in <strong>Film, TV and Multimedia</strong>.</p>
+      <p>My passion lives at the intersection of <strong>motion graphics and visual design</strong> — I love giving ideas a visual language that breathes and moves. Whether it's a title sequence, a brand animation, or a UI transition, I believe movement is the most powerful form of communication.</p>
+      <p>Currently exploring the creative possibilities of <strong>After Effects, Cinema 4D</strong>, and generative design tools to push what's possible in motion.</p>
+      <div class="about-tags">
+        <span class="about-tag">🎓 SKKU</span>
+        <span class="about-tag">🎬 Film, TV & Multimedia</span>
+        <span class="about-tag">✨ Motion Graphics</span>
+        <span class="about-tag">🎨 Visual Design</span>
+        <span class="about-tag">📍 Seoul</span>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
-  <h2>Projects</h2>
-  <div class="project-grid">
+  <div class="projects-header reveal">
+    <div>
+      <div class="projects-label">Selected Work</div>
+      <h2 class="projects-title">PROJECTS</h2>
+    </div>
+    <span class="projects-count">6 works</span>
+  </div>
+  <div class="project-list">
 
-    <div class="card">
-      <h3>Art Gallery Dashboard</h3>
-      <p>A Streamlit dashboard for organizing artworks and visual data.</p>
+    <div class="project-item reveal">
+      <div class="project-num">001</div>
+      <div class="project-info">
+        <div class="project-name">MOTION TITLE SEQUENCE</div>
+        <div class="project-desc">Add your project title — a title sequence, intro animation, or motion branding piece.</div>
+      </div>
+      <div class="project-meta">
+        <div class="project-tags-inline">
+          <span class="ptag">After Effects</span>
+          <span class="ptag">Motion</span>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>SNS Marketing Dashboard</h3>
-      <p>Dashboard analyzing engagement rate and campaign performance.</p>
+    <div class="project-item reveal">
+      <div class="project-num">002</div>
+      <div class="project-info">
+        <div class="project-name">BRAND IDENTITY DESIGN</div>
+        <div class="project-desc">A visual identity project — logo, color system, typography, and motion guidelines.</div>
+      </div>
+      <div class="project-meta">
+        <div class="project-tags-inline">
+          <span class="ptag">Illustrator</span>
+          <span class="ptag">Branding</span>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Music Mood Dashboard</h3>
-      <p>Mood-based music recommendation UI with visual charts.</p>
+    <div class="project-item reveal">
+      <div class="project-num">003</div>
+      <div class="project-info">
+        <div class="project-name">UI ANIMATION / PROTOTYPE</div>
+        <div class="project-desc">An interactive UI with micro-animations and smooth transitions designed in Figma or Principle.</div>
+      </div>
+      <div class="project-meta">
+        <div class="project-tags-inline">
+          <span class="ptag">Figma</span>
+          <span class="ptag">UI/UX</span>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
     </div>
 
-    <div class="card">
-      <h3>Motion Graphics Study</h3>
-      <p>Experimental motion design exploring timing and visual rhythm.</p>
+    <div class="project-item reveal">
+      <div class="project-num">004</div>
+      <div class="project-info">
+        <div class="project-name">MOTION POSTER / VISUAL</div>
+        <div class="project-desc">A cinemagraph, animated poster, or kinetic typography piece — still images brought to life.</div>
+      </div>
+      <div class="project-meta">
+        <div class="project-tags-inline">
+          <span class="ptag">Photoshop</span>
+          <span class="ptag">Animation</span>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+
+    <div class="project-item reveal">
+      <div class="project-num">005</div>
+      <div class="project-info">
+        <div class="project-name">3D MOTION DESIGN</div>
+        <div class="project-desc">A 3D render or motion piece created in Cinema 4D or Blender — materials, lighting, animation.</div>
+      </div>
+      <div class="project-meta">
+        <div class="project-tags-inline">
+          <span class="ptag">Cinema 4D</span>
+          <span class="ptag">3D</span>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
+    </div>
+
+    <div class="project-item reveal">
+      <div class="project-num">006</div>
+      <div class="project-info">
+        <div class="project-name">MULTIMEDIA / FREE PROJECT</div>
+        <div class="project-desc">Any experimental, class, or personal project you're proud of — art direction, editorial design, etc.</div>
+      </div>
+      <div class="project-meta">
+        <div class="project-tags-inline">
+          <span class="ptag">Mixed Media</span>
+        </div>
+        <span class="project-arrow">↗</span>
+      </div>
     </div>
 
   </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
-  <h2>Skills</h2>
-  <div class="skills">
-    <span class="skill">Python</span>
-    <span class="skill">HTML</span>
-    <span class="skill">CSS</span>
-    <span class="skill">Streamlit</span>
-    <span class="skill">After Effects</span>
-    <span class="skill">Premiere Pro</span>
-    <span class="skill">Cinema 4D</span>
-    <span class="skill">Motion Graphics</span>
-    <span class="skill">UI Design</span>
+  <div class="skills-inner">
+    <div class="skills-top reveal">
+      <h2 class="skills-headline">TOOLS &<br><span>SKILLS</span></h2>
+      <p class="skills-note">The software and disciplines I work with every day.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-col reveal">
+        <div class="skill-col-label">Motion</div>
+        <ul class="skill-list">
+          <li class="highlight">After Effects</li>
+          <li class="highlight">Cinema 4D</li>
+          <li>Premiere Pro</li>
+          <li>Blender</li>
+          <li>Lottie / Bodymovin</li>
+        </ul>
+      </div>
+      <div class="skill-col reveal">
+        <div class="skill-col-label">Design</div>
+        <ul class="skill-list">
+          <li class="highlight">Figma</li>
+          <li class="highlight">Illustrator</li>
+          <li>Photoshop</li>
+          <li>InDesign</li>
+          <li>Canva Pro</li>
+        </ul>
+      </div>
+      <div class="skill-col reveal">
+        <div class="skill-col-label">Creative</div>
+        <ul class="skill-list">
+          <li class="highlight">Brand Identity</li>
+          <li class="highlight">Motion Design</li>
+          <li>Typography</li>
+          <li>Storyboarding</li>
+          <li>Art Direction</li>
+        </ul>
+      </div>
+      <div class="skill-col reveal">
+        <div class="skill-col-label">Interests</div>
+        <ul class="skill-list">
+          <li class="highlight">UI Animation</li>
+          <li class="highlight">Generative Design</li>
+          <li>Editorial Design</li>
+          <li>Visual Identity</li>
+          <li>Experimental Media</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
-  <h2>Contact</h2>
-  <div class="card">
-    <p>Email: hkym0@g.skku.edu</p>
-    <p>GitHub: github.com/hkym0-hub</p>
-    <p>Location: Seoul, Korea</p>
+  <div class="contact-layout">
+    <div class="contact-left reveal">
+      <h2 class="contact-big">LET'S<br><span>TALK.</span></h2>
+      <p class="contact-copy">Open to collaborations, internships, freelance projects, and creative exchanges. Let's make something great together.</p>
+      <div class="contact-line-links">
+        <a href="mailto:hkym0@g.skku.edu" class="clink">
+          <span class="clink-label">hkym0@g.skku.edu</span>
+          <span class="clink-arrow">↗</span>
+        </a>
+        <a href="https://github.com/hkym0-hub" class="clink" target="_blank">
+          <span class="clink-label">github.com/hkym0-hub</span>
+          <span class="clink-arrow">↗</span>
+        </a>
+        <a href="https://hkym0-hub.github.io/" class="clink" target="_blank">
+          <span class="clink-label">hkym0-hub.github.io</span>
+          <span class="clink-arrow">↗</span>
+        </a>
+        <a href="https://linkedin.com/in/hurkimyumi" class="clink" target="_blank">
+          <span class="clink-label">linkedin.com/in/hurkimyumi</span>
+          <span class="clink-arrow">↗</span>
+        </a>
+        <a href="#" class="clink">
+          <span class="clink-label">Download Résumé</span>
+          <span class="clink-arrow">↓</span>
+        </a>
+      </div>
+    </div>
+    <div class="contact-right reveal">
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="field">
+            <label for="fn">Name</label>
+            <input id="fn" type="text" placeholder="Your name"/>
+          </div>
+          <div class="field">
+            <label for="fe">Email</label>
+            <input id="fe" type="email" placeholder="your@email.com"/>
+          </div>
+        </div>
+        <div class="field">
+          <label for="fs">Subject</label>
+          <input id="fs" type="text" placeholder="What's on your mind?"/>
+        </div>
+        <div class="field">
+          <label for="fm">Message</label>
+          <textarea id="fm" placeholder="Tell me about your project..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message →</button>
+      </form>
+    </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 Hur Kim Yumi</p>
+  <span class="footer-left">© <span id="yr"></span> Hur Kim Yumi · SKKU · Film, TV & Multimedia</span>
+  <span class="footer-right">SEOUL, KOREA</span>
 </footer>
 
+<script>
+// Year
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+});
+(function animRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,.project-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cursor.style.width='20px';cursor.style.height='20px';
+    ring.style.width='56px';ring.style.height='56px';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cursor.style.width='12px';cursor.style.height='12px';
+    ring.style.width='36px';ring.style.height='36px';
+  });
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach((el,i)=>{
+  el.style.transitionDelay=(i%4)*0.08+'s';
+  obs.observe(el);
+});
+
+// Form submit
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.btn-submit');
+  btn.textContent='✓ Sent!';
+  btn.style.background='#0e0c0a';
+  setTimeout(()=>{
+    btn.textContent='Send Message →';
+    btn.style.background='';
+    e.target.reset();
+  },3000);
+}
+</script>
 </body>
 </html>
