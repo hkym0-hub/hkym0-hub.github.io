@@ -432,20 +432,43 @@ nav{
 .skill-col:last-child{border-right:none}
 .skill-col-label{
   font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;
-  color:var(--orange);font-weight:600;margin-bottom:1.5rem;
+  color:var(--orange);font-weight:600;margin-bottom:1.8rem;
 }
-.skill-list{list-style:none;display:flex;flex-direction:column;gap:0.65rem}
-.skill-list li{
-  font-size:0.95rem;color:rgba(255,255,255,0.5);
-  font-weight:300;
-  padding-bottom:0.65rem;
+.skill-list{list-style:none;display:flex;flex-direction:column;gap:1.1rem}
+.skill-item{
+  display:flex;align-items:center;gap:1rem;
+  padding-bottom:1.1rem;
   border-bottom:1px solid rgba(255,255,255,0.05);
-  transition:color .2s;
   cursor:default;
 }
-.skill-list li:hover{color:var(--cream)}
-.skill-list li:last-child{border-bottom:none}
-.skill-list li.highlight{color:rgba(255,255,255,0.85);font-weight:500}
+.skill-item:last-child{border-bottom:none;padding-bottom:0}
+.skill-ring{position:relative;width:38px;height:38px;flex-shrink:0}
+.skill-ring svg{width:38px;height:38px;transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:rgba(255,255,255,0.08);stroke-width:3}
+.ring-fill{
+  fill:none;stroke:var(--orange);stroke-width:3;
+  stroke-linecap:round;
+  stroke-dasharray:100 100;
+  stroke-dashoffset:100;
+  transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1);
+}
+.skill-ring .pct{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.52rem;font-weight:700;
+  color:rgba(255,255,255,0.55);
+  letter-spacing:0;
+}
+.skill-info{flex:1;min-width:0}
+.skill-name{
+  font-size:0.88rem;color:rgba(255,255,255,0.65);
+  font-weight:400;line-height:1.2;
+}
+.skill-name.hl{color:rgba(255,255,255,0.95);font-weight:500}
+.skill-pct-label{
+  font-size:0.68rem;color:rgba(255,255,255,0.25);
+  margin-top:0.15rem;
+}
 
 /* ── CONTACT ── */
 #contact{max-width:1200px;margin:0 auto;padding:7rem 4rem 8rem}
@@ -772,41 +795,161 @@ footer{
       <div class="skill-col reveal">
         <div class="skill-col-label">Motion</div>
         <ul class="skill-list">
-          <li class="highlight">After Effects</li>
-          <li class="highlight">Cinema 4D</li>
-          <li>Premiere Pro</li>
-          <li>Blender</li>
-          <li>Lottie / Bodymovin</li>
+          <li class="skill-item" data-pct="85">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:14.1"/></svg>
+              <span class="pct">85%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name hl">After Effects</div><div class="skill-pct-label">85%</div></div>
+          </li>
+          <li class="skill-item" data-pct="60">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:37.6"/></svg>
+              <span class="pct">60%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name hl">Cinema 4D</div><div class="skill-pct-label">60%</div></div>
+          </li>
+          <li class="skill-item" data-pct="75">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:23.5"/></svg>
+              <span class="pct">75%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name">Premiere Pro</div><div class="skill-pct-label">75%</div></div>
+          </li>
+          <li class="skill-item" data-pct="45">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:51.7"/></svg>
+              <span class="pct">45%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name">Blender</div><div class="skill-pct-label">45%</div></div>
+          </li>
+          <li class="skill-item" data-pct="55">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:42.3"/></svg>
+              <span class="pct">55%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name">Lottie / Bodymovin</div><div class="skill-pct-label">55%</div></div>
+          </li>
         </ul>
       </div>
       <div class="skill-col reveal">
         <div class="skill-col-label">Design</div>
         <ul class="skill-list">
-          <li class="highlight">Figma</li>
-          <li class="highlight">Illustrator</li>
-          <li>Photoshop</li>
-          <li>InDesign</li>
-          <li>Canva Pro</li>
+          <li class="skill-item" data-pct="90">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:9.4"/></svg>
+              <span class="pct">90%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name hl">Figma</div><div class="skill-pct-label">90%</div></div>
+          </li>
+          <li class="skill-item" data-pct="80">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:18.8"/></svg>
+              <span class="pct">80%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name hl">Illustrator</div><div class="skill-pct-label">80%</div></div>
+          </li>
+          <li class="skill-item" data-pct="75">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:23.5"/></svg>
+              <span class="pct">75%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name">Photoshop</div><div class="skill-pct-label">75%</div></div>
+          </li>
+          <li class="skill-item" data-pct="65">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:32.9"/></svg>
+              <span class="pct">65%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name">InDesign</div><div class="skill-pct-label">65%</div></div>
+          </li>
+          <li class="skill-item" data-pct="70">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:28.2"/></svg>
+              <span class="pct">70%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name">Canva Pro</div><div class="skill-pct-label">70%</div></div>
+          </li>
         </ul>
       </div>
       <div class="skill-col reveal">
         <div class="skill-col-label">Creative</div>
         <ul class="skill-list">
-          <li class="highlight">Brand Identity</li>
-          <li class="highlight">Motion Design</li>
-          <li>Typography</li>
-          <li>Storyboarding</li>
-          <li>Art Direction</li>
+          <li class="skill-item" data-pct="85">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:14.1"/></svg>
+              <span class="pct">85%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name hl">Motion Design</div><div class="skill-pct-label">85%</div></div>
+          </li>
+          <li class="skill-item" data-pct="80">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:18.8"/></svg>
+              <span class="pct">80%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name hl">Brand Identity</div><div class="skill-pct-label">80%</div></div>
+          </li>
+          <li class="skill-item" data-pct="75">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:23.5"/></svg>
+              <span class="pct">75%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name">Typography</div><div class="skill-pct-label">75%</div></div>
+          </li>
+          <li class="skill-item" data-pct="70">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:28.2"/></svg>
+              <span class="pct">70%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name">Storyboarding</div><div class="skill-pct-label">70%</div></div>
+          </li>
+          <li class="skill-item" data-pct="65">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:32.9"/></svg>
+              <span class="pct">65%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name">Art Direction</div><div class="skill-pct-label">65%</div></div>
+          </li>
         </ul>
       </div>
       <div class="skill-col reveal">
         <div class="skill-col-label">Interests</div>
         <ul class="skill-list">
-          <li class="highlight">UI Animation</li>
-          <li class="highlight">Generative Design</li>
-          <li>Editorial Design</li>
-          <li>Visual Identity</li>
-          <li>Experimental Media</li>
+          <li class="skill-item" data-pct="80">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:18.8"/></svg>
+              <span class="pct">80%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name hl">UI Animation</div><div class="skill-pct-label">80%</div></div>
+          </li>
+          <li class="skill-item" data-pct="55">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:42.3"/></svg>
+              <span class="pct">55%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name hl">Generative Design</div><div class="skill-pct-label">55%</div></div>
+          </li>
+          <li class="skill-item" data-pct="70">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:28.2"/></svg>
+              <span class="pct">70%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name">Editorial Design</div><div class="skill-pct-label">70%</div></div>
+          </li>
+          <li class="skill-item" data-pct="75">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:23.5"/></svg>
+              <span class="pct">75%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name">Visual Identity</div><div class="skill-pct-label">75%</div></div>
+          </li>
+          <li class="skill-item" data-pct="60">
+            <div class="skill-ring">
+              <svg viewBox="0 0 38 38"><circle class="ring-bg" cx="19" cy="19" r="15"/><circle class="ring-fill" cx="19" cy="19" r="15" style="stroke-dasharray:94 94;stroke-dashoffset:37.6"/></svg>
+              <span class="pct">60%</span>
+            </div>
+            <div class="skill-info"><div class="skill-name">Experimental Media</div><div class="skill-pct-label">60%</div></div>
+          </li>
         </ul>
       </div>
     </div>
@@ -901,6 +1044,21 @@ document.querySelectorAll('a,button,.project-item').forEach(el=>{
     ring.style.width='36px';ring.style.height='36px';
   });
 });
+
+// Animate skill rings on scroll
+const ringObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.ring-fill').forEach(ring => {
+        const orig = ring.style.strokeDashoffset;
+        ring.style.strokeDashoffset = '94';
+        setTimeout(() => { ring.style.strokeDashoffset = orig; }, 100);
+      });
+      ringObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.skill-col').forEach(col => ringObs.observe(col));
 
 // Scroll reveal
 const obs = new IntersectionObserver(entries=>{
